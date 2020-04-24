@@ -1,0 +1,251 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    android:background="@drawable/colourful"
+
+    >
+
+
+
+
+    <android.support.v4.widget.Space
+        android:layout_width="wrap_content"
+        android:layout_height="100dp" />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text = "@string/input"
+
+                />
+
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+              <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="top|center">
+
+                  <LinearLayout
+                      android:id="@+id/ll"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="top"
+                      android:orientation="vertical">
+
+
+                      <android.support.v4.widget.Space
+                          android:layout_width="wrap_content"
+                          android:layout_height="25dp" />
+
+
+                      <LinearLayout
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                          <EditText
+                              android:id="@+id/first"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/second"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/second"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/third"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/third"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/fourth"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+
+                      </LinearLayout>
+
+                      <android.support.v4.widget.Space
+                          android:layout_width="wrap_content"
+                          android:layout_height="30dp" />
+
+                      <LinearLayout
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                          <EditText
+                              android:id="@+id/fourth"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/fifth"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/fifth"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/sixth"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/sixth"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/seventh"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+
+                      </LinearLayout>
+
+                      <android.support.v4.widget.Space
+                          android:layout_width="wrap_content"
+                          android:layout_height="30dp" />
+
+                      <LinearLayout
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                          <EditText
+                              android:id="@+id/seventh"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/eighth"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/eighth"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:nextFocusDown="@+id/ninth"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                          <android.support.v4.widget.Space
+                              android:layout_width="30dp"
+                              android:layout_height="wrap_content" />
+
+                          <EditText
+                              android:id="@+id/ninth"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorGrey"
+                              android:ems="4"
+                              android:gravity="center"
+                              android:importantForAutofill="no"
+                              android:inputType="numberSigned"
+                              android:padding="24dp"
+                              tools:ignore="LabelFor" />
+
+                      </LinearLayout>
+
+                      <android.support.v4.widget.Space
+                          android:layout_width="wrap_content"
+                          android:layout_height="40dp" />
+
+                      <Button
+                          android:id="@+id/calc"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center"
+                          android:padding="24dp"
+                          android:text="@string/button" />
+
+
+                  </LinearLayout>
+
+
+    </ScrollView>
+
+  </HorizontalScrollView>
+
+
+
+</LinearLayout>

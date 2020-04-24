@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">3X3 Matrix Inverse</string>
+    <string name="button">Calculate</string>
+    <string name="input">Enter input</string>
+    <string name="output">Inverse Calculated :</string>
+    <string name="blank">--</string>
+    <string name="detzero">Determinant is zero (none or infinite solutions)</string>
+</resources>
