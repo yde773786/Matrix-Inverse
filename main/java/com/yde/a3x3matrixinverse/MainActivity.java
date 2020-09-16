@@ -9,95 +9,28 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int input[]= new int[9];
-    private EditText one;
-    private EditText two;
-    private EditText three;
-    private EditText four;
-    private EditText five;
-    private EditText six;
-    private EditText seven;
-    private EditText eight;
-    private EditText nine;
-    private Button Calculate;
-
+    private int[] input = new int[9];
+    private EditText[][] matrix = new EditText[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        one = (EditText)findViewById(R.id.first);
-        two = (EditText)findViewById(R.id.second);
-        three = (EditText)findViewById(R.id.third);
-        four = (EditText)findViewById(R.id.fourth);
-        five = (EditText)findViewById(R.id.fifth);
-        six = (EditText)findViewById(R.id.sixth);
-        seven = (EditText)findViewById(R.id.seventh);
-        eight = (EditText)findViewById(R.id.eighth);
-        nine = (EditText)findViewById(R.id.ninth);
-        one.requestFocus();
+        int[] matrixId = new int[]{R.id.first, R.id.second, R.id.third, R.id.fourth, R.id.fifth, R.id.sixth, R.id.seventh, R.id.eighth, R.id.ninth};
 
-        Calculate = (Button)findViewById(R.id.calc);
-        Calculate.setOnClickListener(new View.OnClickListener() {
+        for(int i = 0 ; i<3 ; i++){
+            for(int j = 0 ; j<3 ; j++){
+                matrix[i][j] = findViewById(matrixId[3*i + j]);
+            }
+        }
+
+        matrix[0][0].requestFocus();
+
+        Button calculate = (Button) findViewById(R.id.calc);
+        calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean z = true;
-
-                if(one.getText().toString().equals("")){
-                    z=false;
-                   one.setError("Enter Value");}
-                else
-                    input[0] = Integer.valueOf(one.getText().toString());
-
-                if(two.getText().toString().equals("")){
-                    z=false;
-                    two.setError("Enter Value");}
-                 else
-                     input[1] = Integer.valueOf(two.getText().toString());
-
-                if(three.getText().toString().equals("")){
-                    z=false;
-                    three.setError("Enter Value");}
-                else
-                    input[2] = Integer.valueOf(three.getText().toString());
-
-                if(four.getText().toString().equals("")){
-                    z=false;
-                    four.setError("Enter Value");}
-                else
-                    input[3] = Integer.valueOf(four.getText().toString());
-
-                if(five.getText().toString().equals("")){
-                    z=false;
-                    five.setError("Enter Value");}
-                else
-                    input[4] = Integer.valueOf(five.getText().toString());
-
-                if(six.getText().toString().equals("")){
-                    z=false;
-                    six.setError("Enter Value");}
-                else
-                    input[5] = Integer.valueOf(six.getText().toString());
-
-                if(seven.getText().toString().equals("")){
-                    z=false;
-                    seven.setError("Enter Value");}
-                else
-                    input[6] = Integer.valueOf(seven.getText().toString());
-
-                if(eight.getText().toString().equals("")){
-                    z=false;
-                    eight.setError("Enter Value");}
-
-                else
-                    input[7] = Integer.valueOf(eight.getText().toString());
-
-                if(nine.getText().toString().equals("")){
-                    z=false;
-                    nine.setError("Enter Value");}
-                else
-                    input[8] = Integer.valueOf(nine.getText().toString());
-                if(z) {
+                if(getValue()) {
                     Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
                     intent.putExtra("KEY", input);
                     startActivity(intent);
@@ -105,5 +38,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean getValue(){
+        boolean z=true;
+        for(int i = 0 ; i < 3 ; i++){
+            for(int j = 0 ; j<3 ; j++){
+                if(matrix[i][j].getText().toString().equals("")){
+                    z=false;
+                    matrix[i][j].setError("Enter Value");}
+                else
+                    input[3*i + j] = Integer.parseInt(matrix[i][j].getText().toString());
+            }
+        }
+        return z;
     }
 }
