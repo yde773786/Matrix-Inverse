@@ -80,18 +80,17 @@ public class Matrix{
             return b;
     }
 
-   private static int HCF(int a, int b){
-        int lower = (int)(Math.min(a,b)), higher = (int)(Math.max(a, b)), hcf = 1;
-        if(higher%lower==0) return lower;
-        for(int i = 2; i<Math.sqrt(lower); i++){
-            if(a%i==0 && b%i==0 && i>hcf) hcf = i;
-            if(a%(lower/i)==0 && b%(lower/i)==0 && lower/i > hcf) return (lower/i);
-        }//foo loop - i    
+    private int HCF(int a, int b){
+        int hcf = 1;
+        a = (int)Math.abs(a);
+        b = (int)Math.abs(b);
+        int low = a;
+        if(b<low)
+            low = b;
+        for(int i = 1; i<=low;i++){
+            if(a%i== 0 && b%i == 0)
+                hcf=i;
+        }
         return hcf;
-    }//end of private static int HCF(int,int)
-
-    private static int EuclideanAlgorithm(int a, int b) {
-        if(b==0) return a;
-        return EuclideanAlgorithm(b, a%b);
     }
 }
