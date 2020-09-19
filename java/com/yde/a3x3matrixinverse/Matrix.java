@@ -1,25 +1,23 @@
 package com.yde.a3x3matrixinverse;
 
 public class Matrix{
-    private int[][] a;
-    public Matrix(int[][] input){
-        a= input;
-    }
-    private int[][]  Transpose(int[][] input){
+
+    private static int[][] transpose(int[][] input){
+        
         int[][] b = new int[input.length][input.length];
         for(int i = 0 ; i <input.length; i++)
             for(int j = 0 ; j <input.length ; j++ ){
                 b[i][j] = input[j][i];
             }
         return b;
+            
     }
+    
+    public static int determinant(int n , int[][] matrix){
 
-    public int Determinant(){
-        return a[0][0]*(a[1][1]*a[2][2]-a[2][1]*a[1][2]) - a[0][1]*(a[1][0]*a[2][2]-a[2][0]*a[1][2]) + a[0][2]*(a[1][0]*a[2][1]-a[2][0]*a[1][1]);
-    }
-
-    public int determinant(int n , int[][] matrix){
-
+        if(n==1){
+            return matrix[0][0];
+        }
         if(n == 2){
             return matrix[0][0] * matrix[1][1] - matrix[0][1]*matrix[1][0];
         }
@@ -28,7 +26,7 @@ public class Matrix{
             int sign = 1;
             int sum = 0;
             for(int i = 0 ; i < n ; i++){
-                sum += sign*matrix[0][i]*determinant(n-1, subMatrix(n , i , matrix));
+                sum += sign*matrix[0][i]*determinant(n-1, subMatrix(n , 0 , i , matrix));
                 sign*=-1;
             }
             return sum;
@@ -36,83 +34,67 @@ public class Matrix{
 
     }
 
-    private int[][] subMatrix(int n, int omit , int[][] matrix) {
+    private static int[][] subMatrix(int n, int omit_row , int omit_col , int[][] matrix) {
         
         int[][] output = new int[n-1][n-1];
-        for(int i = 1 ; i <n ; i++){
-            for(int j = 0 , k = 0 ; j<n ; j++){
-                if(j!=omit){
-                   output[i-1][k++] = matrix[i][j];
+        for(int i = 0 , l = 0 ; i <n ; i++){
+            if(i!=omit_row) {
+                for (int j = 0, k = 0; j < n; j++) {
+                    if (j != omit_col) {
+                        output[l][k++] = matrix[i][j];
+                    }
                 }
+                l++;
             }
         }
         return output;
         
     }
 
-    private int[][] Adjoint(){
-        int[][] b = new int[a.length][a.length];
-        int sign = 1;
-        for(int i = 0 ; i <a.length; i++){
-            for(int j = 0 ; j<a.length ; j++){
-                int lr = 0 , lc = 0 , mr = 0 , mc = 0;
-                if(i == 0){
-                    lr = 1;
-                    mr = 2;
-                }
-                if(i == 1){
-                    lr = 0;
-                    mr = 2;
-                }
-                if(i == 2){
-                    lr = 0;
-                    mr = 1;
-                }
-                if(j == 0){
-                    lc = 1;
-                    mc = 2;
-                }
-                if(j == 1){
-                    lc = 0;
-                    mc = 2;
-                }
-                if(j == 2){
-                    lc = 0;
-                    mc = 1;
-                }
-                b[i][j] = sign*(a[lr][lc]*a[mr][mc] - a[mr][lc]*a[lr][mc]);
-                sign = (-1)*sign;
+    private static int[][] adjoint(int n , int[][] matrix){
+
+        int sign;
+        int[][] adj = new int[n][n];
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < n ; j++){
+                sign = (int)Math.pow(-1 , (i+1 + j+1));
+                adj[i][j] = sign*determinant(n-1 , subMatrix(n, i , j , matrix));
             }
         }
-        return Transpose(b);
-    }
 
-    public String[][] Inverse(){
+        return transpose(adj);
+        
+    }
+    
+    public static String[][] Inverse(int[][] a){
+        
         String[][] b = new String[a.length][a.length];
-            int[][] c = Adjoint();
+            int[][] c = adjoint(a.length , a);
             for(int i = 0 ; i <a.length; i++){
                 for(int j = 0 ; j <a.length ; j++){
-                    int hcf = HCF(c[i][j],Determinant());
-                    if(hcf==(int)(Math.abs(Determinant()))){
-                        b[i][j] = String.valueOf((int)(c[i][j]/Determinant()));
+                    int hcf = HCF(c[i][j],determinant(a.length , a));
+                    if(hcf==(int)(Math.abs(determinant(a.length , a)))){
+                        b[i][j] = String.valueOf((int)(c[i][j]/determinant(a.length , a)));
                     }
 
                     else{
-                        if((c[i][j]<0&&Determinant()<0)||c[i][j]>0&&Determinant()>0)
-                            b[i][j] = (int)(Math.abs(c[i][j]/hcf)) + "/" + (int)(Math.abs(Determinant()/hcf));
+                        if((c[i][j]<0&&determinant(a.length , a)<0)||c[i][j]>0&&determinant(a.length , a)>0)
+                            b[i][j] = (int)(Math.abs(c[i][j]/hcf)) + "/" + (int)(Math.abs(determinant(a.length , a)/hcf));
                         else if(c[i][j]==0){
                             b[i][j] = String.valueOf(0);
                         }
                         else
-                            b[i][j] = "-" + (int)(Math.abs(c[i][j]/hcf)) + "/" + (int)(Math.abs(Determinant()/hcf));
+                            b[i][j] = "-" + (int)(Math.abs(c[i][j]/hcf)) + "/" + (int)(Math.abs(determinant(a.length , a)/hcf));
 
                     }
                 }
             }
             return b;
+            
     }
 
-    private int HCF(int a, int b){
+    private static int HCF(int a, int b){
+        
         int hcf = 1;
         a = (int)Math.abs(a);
         b = (int)Math.abs(b);
@@ -124,5 +106,6 @@ public class Matrix{
                 hcf=i;
         }
         return hcf;
+        
     }
 }

@@ -61,13 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
         matrix[0][0].requestFocus();
 
-        Button calculate = (Button) findViewById(R.id.calc);
+        Button calculate = (Button) findViewById(R.id.determinant);
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getValue()) {
                     Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
                     intent.putExtra("KEY", input);
+                    intent.putExtra("NKEY", selectedDimension);
                     startActivity(intent);
                 }
             }

@@ -5,4 +5,6 @@
     <string name="output">Inverse Calculated :</string>
     <string name="blank">--</string>
     <string name="detzero">Determinant is zero (none or infinite solutions)</string>
+    <string name="input_calculated">Inverse Calculated:</string>
+    <string name="choose_dimension">Choose dimension:</string>
 </resources>

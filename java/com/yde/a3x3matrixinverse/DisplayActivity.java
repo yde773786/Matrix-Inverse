@@ -1,50 +1,76 @@
 package com.yde.a3x3matrixinverse;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.TextView;
+
+import static com.yde.a3x3matrixinverse.MainActivity.DpToPx;
 
 
 public class DisplayActivity extends AppCompatActivity {
-    private int[][] input = new int[4][4];
-    private TextView[][] matrix = new TextView[3][3];
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        int[] matrixId = new int[]{R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine};
         int[] temp = getIntent().getIntArrayExtra("KEY");
+        int selectedDimension = getIntent().getIntExtra("NKEY" , 0);
+        int[][] input = new int[selectedDimension][selectedDimension];
         int cnt = 0;
-        for(int i = 0 ; i < input.length ; i++){
-            for(int j = 0 ; j < input.length ; j++){
+        for(int i = 0 ; i < selectedDimension ; i++){
+            for(int j = 0 ; j < selectedDimension ; j++){
                 input[i][j] = temp[cnt++];
-                if(3*i + j <9 && i !=3 && j != 3) {
-                    matrix[i][j] = findViewById(matrixId[3 * i + j]);
-                }
             }
         }
 
-        TextView conclude = (TextView) findViewById(R.id.detzero);
+        TextView[][] matrix = new TextView[selectedDimension][selectedDimension];
+        GridLayout outputGrid = findViewById(R.id.gridLayout);
 
-        Matrix ob = new Matrix(input);
-        if(ob.Determinant()==0){
-            for(int i = 0 ; i <3 ; i++){
-                for(int j = 0 ; j<3 ; j++){
+        TextView conclude = (TextView) findViewById(R.id.determinant);
+        outputGrid.setColumnCount(selectedDimension);
+        outputGrid.setRowCount(selectedDimension);
+
+        for (int i = 0; i < selectedDimension; i++) {
+            for (int j = 0; j < selectedDimension; j++) {
+                GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+                matrix[i][j] = new EditText(mContext);
+                param.width = DpToPx(mContext, 90);
+                param.height = DpToPx(mContext, 90);
+                param.rightMargin = 0;
+                param.topMargin = 0;
+                param.leftMargin = 0;
+                param.bottomMargin = 0;
+                param.columnSpec = GridLayout.spec(j);
+                param.rowSpec = GridLayout.spec(i);
+                matrix[i][j].setGravity(Gravity.CENTER);
+                matrix[i][j].setLayoutParams(param);
+                matrix[i][j].setBackgroundResource(R.drawable.my_border);
+                outputGrid.addView(matrix[i][j], selectedDimension * i + j);
+            }
+        }
+
+        if(Matrix.determinant(selectedDimension , input)==0){
+            for(int i = 0 ; i <selectedDimension ; i++){
+                for(int j = 0 ; j<selectedDimension ; j++){
                     matrix[i][j].setText(R.string.blank);
                 }
             }
             conclude.setText(R.string.detzero);
         }
         else {
-            String[][] output = ob.Inverse();
-            for(int i = 0 ; i <3 ; i++){
-                for(int j = 0 ; j<3 ; j++){
+            String[][] output = Matrix.Inverse(input);
+            for(int i = 0 ; i <selectedDimension ; i++){
+                for(int j = 0 ; j<selectedDimension ; j++){
                     matrix[i][j].setText(output[i][j]);
                 }
             }
-            conclude.setText(String.valueOf(ob.determinant(4,input)));
+            conclude.setText(String.format("Determinant is : %s", Matrix.determinant(selectedDimension, input)));
         }
 
     }
