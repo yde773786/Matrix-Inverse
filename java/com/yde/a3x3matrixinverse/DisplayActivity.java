@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
@@ -39,9 +38,9 @@ public class DisplayActivity extends AppCompatActivity {
         for (int i = 0; i < selectedDimension; i++) {
             for (int j = 0; j < selectedDimension; j++) {
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-                matrix[i][j] = new EditText(mContext);
-                param.width = DpToPx(mContext, 90);
-                param.height = DpToPx(mContext, 90);
+                matrix[i][j] = new TextView(mContext);
+                param.width = DpToPx(mContext, 80);
+                param.height = DpToPx(mContext, 80);
                 param.rightMargin = 0;
                 param.topMargin = 0;
                 param.leftMargin = 0;
