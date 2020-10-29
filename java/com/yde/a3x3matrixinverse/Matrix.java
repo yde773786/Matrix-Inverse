@@ -94,18 +94,17 @@ public class Matrix{
     }
 
     private static int HCF(int a, int b){
-        
-        int hcf = 1;
-        a = (int)Math.abs(a);
-        b = (int)Math.abs(b);
-        int low = a;
-        if(b<low)
-            low = b;
-        for(int i = 1; i<=low;i++){
-            if(a%i== 0 && b%i == 0)
-                hcf=i;
+
+        int x = Math.abs(a);
+        int y = Math.abs(b);
+
+        while (y != 0){
+           int r = x % y;
+            x = y;
+            y = r;
         }
-        return hcf;
-        
+
+        return x;
+
     }
 }
